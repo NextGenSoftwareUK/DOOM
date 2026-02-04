@@ -29,6 +29,7 @@ rcsid[] = "$Id: p_doors.c,v 1.4 1997/02/03 16:47:53 b1 Exp $";
 #include "p_local.h"
 
 #include "s_sound.h"
+#include "doom_star_integration.h"
 
 
 // State.
@@ -224,6 +225,9 @@ EV_DoLockedDoor
 	    return 0;
 	if (!p->cards[it_bluecard] && !p->cards[it_blueskull])
 	{
+	    // OASIS STAR API: Check cross-game inventory
+	    if (Doom_STAR_CheckDoorAccess(line - lines, 2))  // Blue keycard
+		break;  // Door opened with cross-game keycard
 	    p->message = PD_BLUEO;
 	    S_StartSound(NULL,sfx_oof);
 	    return 0;
@@ -236,6 +240,9 @@ EV_DoLockedDoor
 	    return 0;
 	if (!p->cards[it_redcard] && !p->cards[it_redskull])
 	{
+	    // OASIS STAR API: Check cross-game inventory
+	    if (Doom_STAR_CheckDoorAccess(line - lines, 1))  // Red keycard
+		break;  // Door opened with cross-game keycard
 	    p->message = PD_REDO;
 	    S_StartSound(NULL,sfx_oof);
 	    return 0;
@@ -249,6 +256,9 @@ EV_DoLockedDoor
 	if (!p->cards[it_yellowcard] &&
 	    !p->cards[it_yellowskull])
 	{
+	    // OASIS STAR API: Check cross-game inventory
+	    if (Doom_STAR_CheckDoorAccess(line - lines, 3))  // Yellow keycard
+		break;  // Door opened with cross-game keycard
 	    p->message = PD_YELLOWO;
 	    S_StartSound(NULL,sfx_oof);
 	    return 0;

@@ -46,6 +46,7 @@ rcsid[] = "$Id: p_inter.c,v 1.4 1997/02/03 22:45:11 b1 Exp $";
 #pragma implementation "p_inter.h"
 #endif
 #include "p_inter.h"
+#include "doom_star_integration.h"
 
 
 #define BONUSADD	6
@@ -386,6 +387,8 @@ P_TouchSpecialThing
 	    player->health = 200;
 	player->mo->health = player->health;
 	player->message = GOTHTHBONUS;
+	// OASIS STAR API: Track berserk pack pickup
+	Doom_STAR_OnItemPickup("berserk_pack", "Berserk Pack - Double damage");
 	break;
 	
       case SPR_BON2:
@@ -422,6 +425,8 @@ P_TouchSpecialThing
 	if (!player->cards[it_bluecard])
 	    player->message = GOTBLUECARD;
 	P_GiveCard (player, it_bluecard);
+	// OASIS STAR API: Track keycard pickup
+	Doom_STAR_OnKeycardPickup(2);  // Blue keycard
 	if (!netgame)
 	    break;
 	return;
@@ -430,6 +435,8 @@ P_TouchSpecialThing
 	if (!player->cards[it_yellowcard])
 	    player->message = GOTYELWCARD;
 	P_GiveCard (player, it_yellowcard);
+	// OASIS STAR API: Track keycard pickup
+	Doom_STAR_OnKeycardPickup(3);  // Yellow keycard
 	if (!netgame)
 	    break;
 	return;
@@ -438,6 +445,8 @@ P_TouchSpecialThing
 	if (!player->cards[it_redcard])
 	    player->message = GOTREDCARD;
 	P_GiveCard (player, it_redcard);
+	// OASIS STAR API: Track keycard pickup
+	Doom_STAR_OnKeycardPickup(1);  // Red keycard
 	if (!netgame)
 	    break;
 	return;
@@ -446,6 +455,8 @@ P_TouchSpecialThing
 	if (!player->cards[it_blueskull])
 	    player->message = GOTBLUESKUL;
 	P_GiveCard (player, it_blueskull);
+	// OASIS STAR API: Track keycard pickup
+	Doom_STAR_OnKeycardPickup(4);  // Skull key
 	if (!netgame)
 	    break;
 	return;
@@ -454,6 +465,8 @@ P_TouchSpecialThing
 	if (!player->cards[it_yellowskull])
 	    player->message = GOTYELWSKUL;
 	P_GiveCard (player, it_yellowskull);
+	// OASIS STAR API: Track keycard pickup
+	Doom_STAR_OnKeycardPickup(4);  // Skull key
 	if (!netgame)
 	    break;
 	return;
@@ -462,6 +475,8 @@ P_TouchSpecialThing
 	if (!player->cards[it_redskull])
 	    player->message = GOTREDSKULL;
 	P_GiveCard (player, it_redskull);
+	// OASIS STAR API: Track keycard pickup
+	Doom_STAR_OnKeycardPickup(4);  // Skull key
 	if (!netgame)
 	    break;
 	return;

@@ -6,9 +6,13 @@
 #
 CC=  gcc  # gcc or g++
 
-CFLAGS=-g -Wall -DNORMALUNIX -DLINUX # -DUSEASM 
-LDFLAGS=-L/usr/X11R6/lib
-LIBS=-lXext -lX11 -lnsl -lm
+# OASIS STAR API Integration
+STAR_API_DIR=../../OASIS-master/Game Integration/NativeWrapper
+STAR_API_BUILD=$(STAR_API_DIR)/build/Release
+
+CFLAGS=-g -Wall -DNORMALUNIX -DLINUX -I"$(STAR_API_DIR)" # -DUSEASM 
+LDFLAGS=-L/usr/X11R6/lib -L"$(STAR_API_BUILD)"
+LIBS=-lXext -lX11 -lnsl -lm -lstar_api
 
 # subdirectory for objects
 O=linux
@@ -75,7 +79,8 @@ OBJS=				\
 		$(O)/s_sound.o		\
 		$(O)/z_zone.o			\
 		$(O)/info.o				\
-		$(O)/sounds.o
+		$(O)/sounds.o			\
+		$(O)/doom_star_integration.o
 
 all:	 $(O)/linuxxdoom
 

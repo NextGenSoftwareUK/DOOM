@@ -76,6 +76,7 @@ static const char rcsid[] = "$Id: d_main.c,v 1.8 1997/02/03 22:45:09 b1 Exp $";
 
 
 #include "d_main.h"
+#include "doom_star_integration.h"
 
 //
 // D-DoomLoop()
@@ -1105,6 +1106,9 @@ void D_DoomMain (void)
 
     printf ("S_Init: Setting up sound.\n");
     S_Init (snd_SfxVolume /* *8 */, snd_MusicVolume /* *8*/ );
+
+    printf ("STAR API: Initializing OASIS STAR API integration.\n");
+    Doom_STAR_Init();
 
     printf ("HU_Init: Setting up heads up display.\n");
     HU_Init ();
